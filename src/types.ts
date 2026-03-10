@@ -41,6 +41,9 @@ export interface SessionConfig {
 
   // Multi-turn support (Task 15)
   multiTurn?: boolean;  // If true, use AsyncIterable prompt for multi-turn conversations
+
+  // Plugin loading: passed directly to SDK query() options.plugins
+  plugins?: Array<{ type: 'local'; path: string }>;
 }
 
 export interface ClaudeSession {
@@ -116,4 +119,11 @@ export interface PluginConfig {
    * Default: false.
    */
   skipSafetyChecks?: boolean;
+
+  /**
+   * Default plugins to load for every Claude Code session.
+   * Each entry is { type: 'local', path: '/absolute/or/relative/path' }.
+   * Can be overridden per-session via the claude_launch `plugins` parameter.
+   */
+  defaultPlugins?: Array<{ type: 'local'; path: string }>;
 }

@@ -71,6 +71,18 @@ export function makeClaudeLaunchTool(ctx: OpenClawPluginToolContext) {
           },
         ),
       ),
+      plugins: Type.Optional(
+        Type.Array(
+          Type.Object({
+            type: Type.Literal("local"),
+            path: Type.String({ description: "Absolute or relative path to the plugin directory" }),
+          }),
+          {
+            description:
+              "Plugins to load for this session. Each entry is { type: 'local', path: '...' }. Defaults to plugin config defaultPlugins.",
+          },
+        ),
+      ),
     }),
     async execute(_id: string, params: any) {
       if (!sessionManager) {
@@ -412,6 +424,7 @@ export function makeClaudeLaunchTool(ctx: OpenClawPluginToolContext) {
           permissionMode: params.permission_mode,
           originChannel,
           originAgentId: ctx.agentId || undefined,
+          plugins: params.plugins ?? pluginConfig.defaultPlugins,
         });
 
         const promptSummary =

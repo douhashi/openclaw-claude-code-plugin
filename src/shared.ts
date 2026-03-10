@@ -29,6 +29,7 @@ export function setPluginConfig(config: Partial<PluginConfig>): void {
     fallbackChannel: config.fallbackChannel,
     agentChannels: config.agentChannels,
     maxAutoResponds: config.maxAutoResponds ?? 10,
+    defaultPlugins: config.defaultPlugins,
   };
 }
 

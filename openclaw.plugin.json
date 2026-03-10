@@ -64,6 +64,18 @@
         "type": "boolean",
         "default": false,
         "description": "Skip ALL pre-launch safety guards (autonomy skill, heartbeat, HEARTBEAT.md, agentChannels). Use only for development/testing."
+      },
+      "defaultPlugins": {
+        "type": "array",
+        "description": "Default plugins to load for every Claude Code session. Can be overridden per-session via the claude_launch plugins parameter.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": ["local"] },
+            "path": { "type": "string", "description": "Absolute or relative path to the plugin directory" }
+          },
+          "required": ["type", "path"]
+        }
       }
     }
   }
